@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-import sys
-import re
-import urllib, urllib2
+# import sys
+# import re
+# import urllib, urllib2
 import requests
 import pymongo
 import datetime
@@ -95,7 +95,7 @@ def func(tuple):
 
     for item in titleurl:
         url = item["link"]
-        print "url:", url
+        print("url:", url)
         content = GetContent(url)
         item["content"] = content
         ContentSave(item)
@@ -105,11 +105,11 @@ if __name__ == '__main__':
     start = datetime.datetime.now()
 
     querystring = u"清华"
-    type = 2 # 2-文章，1-微信号
+    text_type = 2  # 2-文章，1-微信号
 
     # 多进程抓取
     p = mp.Pool()
-    p.map_async(func, [(querystring, type, page) for page in range(1, 50, 1)])
+    p.map_async(func, [(querystring, text_type, page) for page in range(1, 50, 1)])
     p.close()
     p.join()
 
@@ -119,4 +119,4 @@ if __name__ == '__main__':
     #     func(tuple)
 
     end = datetime.datetime.now()
-    print "last time: ", end-start
+    print("last time: ", end-start)
